@@ -1,4 +1,6 @@
-# Un poco de historia
+# Introducción
+
+## Un poco de historia
 
 Los mecanismos para ejecutar cálculos existen desde hace siglos. El ejemplo más conocido es la *Pascalina*, creada por Blaise Pascal, en el siglo XVII. Esta máquina se especializaba en realizar sumas y restas con números de hasta 10 dígitos (incluidos los decimales).
 
@@ -10,11 +12,11 @@ Para la segunda guerra mundial, los alemanes implementaron una máquina que encr
 Paralelo a los trabajos de Turing, el ejercito de EE.UU. trabajó en una máquina para computar tablas de trayectoria balística, llamada ENIAC.
 
 
-# Computadoras modernas
+## Computadoras modernas
 
-## Modelo Von Neumann
+### Modelo Von Neumann
 
-![Modelo Von Neumann](00-00-modelo-von-neumann.png)
+![Modelo Von Neumann](00-00-modelo-von-neumann.png){width=256px}
 
 El modelo Von Neumann reconoce 5 componentes principales en una computadora
 
@@ -30,20 +32,20 @@ El modelo Von Neumann reconoce 5 componentes principales en una computadora
 
 Este modelo además introduce el concepto de *programa almacenado*, en el que los programas se almacenan en conjunto los datos de entrada, pudiendo ser manipulados como datos.
 
-## Modelo de bus de sistema
+### Modelo de bus de sistema
 
-![Bus de sistema](00-01-bus-de-sistema.png)
+![Bus de sistema](00-01-bus-de-sistema.png){width=512px}
 
 Esta modernización del modelo Von Neumann propone el uso de un *bus simple del sistema* por el cual circulan los datos (*Data Bus*), las direcciones de memoria donde se encuentran esos datos (*Address Bus*), y los datos para controlar las distintas unidades (*Control Bus*). Además, se combina la ALU con la unidad de control, pasándose a llamar CPU.
 
-## Arquitectura Harvard
+### Arquitectura Harvard
 
-![Arquitectura Harvard](00-02-arquitectura-harvard.png)
+![Arquitectura Harvard](00-02-arquitectura-harvard.png){width=256px}
 
 La característica principal del modelo harvard es que utiliza distintos buses para la memoria de instrucciones y la de datos. Esto le permite usar distintas tecnologías para cada memoria, como también distinto espacio de memoria, por ejemplo, puedo tener instrucciones de 16 bits de largo y el bus de datos con un ancho de 8 bits.
 
 
-# Niveles de complejidad
+## Niveles de complejidad
 
 Como cualquier sistema complejo, una computadora puede ser vista desde un número de niveles, siendo el más alto el nivel de *usuario* y el más bajo, transistores, capacitores, etc. Cada nivel representa una abstracción. Esto nos permite independizar los distintos niveles: un usuario no necesita saber cómo está programada una aplicación para usarla, y un programador no necesita saber cómo están dispuestas las compuertas lógicas del procesador para programar.
 
@@ -65,7 +67,7 @@ De arriba hacia abajo los niveles son estos:
 
 * **Compuertas lógicas y transistores**
 
-# Bibliografía
+## Bibliografía
 
 * Computer Organization and Design, 4th edition, James Murdocca, Unidad 1
 

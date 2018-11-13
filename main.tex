@@ -1,0 +1,32 @@
+
+\documentclass[12pt, a4paper, twoside]{article}
+
+
+\usepackage[utf8]{inputenc} % Especifica la codificación de caracteres de los documentos.
+\usepackage[spanish]{babel} % Indica que el documento se escribirá en español.
+\usepackage{graphicx}
+
+\usepackage{array}
+\usepackage{amssymb,amsmath} % utilizado por pandoc para renderizar formulas
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{multirow}
+%%% fixes pandoc %%%
+\providecommand{\tightlist}{} % utilizado por enumerados
+
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\begin{document}
+
+\tableofcontents
+
+\include{00-intro}
+\include{01-unidades-funcionales}
+
+\end{document}
