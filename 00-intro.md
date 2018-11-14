@@ -49,7 +49,7 @@ La característica principal del modelo harvard es que utiliza distintos buses p
 
 Como cualquier sistema complejo, una computadora puede ser vista desde un número de niveles, siendo el más alto el nivel de *usuario* y el más bajo, transistores, capacitores, etc. Cada nivel representa una abstracción. Esto nos permite independizar los distintos niveles: un usuario no necesita saber cómo está programada una aplicación para usarla, y un programador no necesita saber cómo están dispuestas las compuertas lógicas del procesador para programar.
 
-![Niveles de complejidad](00-03-niveles-de-complejidad.png)
+![Niveles de complejidad](00-03-niveles-de-complejidad.png){width=256px}
 
 La estratificación permitió además que el usuario actualizara su computadora manteniendo compatibilidad de las capas superiores. El programador puede escribir código para una familia de hardware y que este se mantenga compatible con las actualizaciones.
 
