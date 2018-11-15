@@ -14,7 +14,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg8"
-   sodipodi:docname="01-00-compuerta-and.svg"
+   sodipodi:docname="01-05-compuerta-nor.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <defs
      id="defs2">
@@ -264,9 +264,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="420.05727"
-     inkscape:cy="955.10562"
+     inkscape:zoom="2.8"
+     inkscape:cx="309.3733"
+     inkscape:cy="986.93642"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -329,7 +329,7 @@
          y="15.784926"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;font-family:serif;-inkscape-font-specification:'serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332px"
          id="tspan1064-8">Tabla de verdad</tspan></text>
-   <text
+    <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;line-height:100%;font-family:serif;-inkscape-font-specification:'serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="22.209391"
@@ -359,13 +359,13 @@
          x1="83.992264" />
       <line
          id="line2121"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.59506124;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.48879901;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          y2="34.002232"
          x2="118.93004"
          y1="34.002232"
-         x1="112.02492" />
+         x1="114.27087" />
       <path
-         d="m 89.708559,25.991436 0.890493,2.003228 c 0.593666,1.335356 0.964703,2.448475 1.113126,3.338972 0.148389,0.890496 0.21584,1.780604 0.21584,2.671102 0,0.883504 -0.06738,1.773997 -0.21584,2.664494 -0.148398,0.890499 -0.51946,2.00323 -1.113126,3.338974 -0.593658,1.335357 -0.890493,2.003228 -0.890493,2.003228 0,0 0.890493,0 2.671099,0 1.780598,0 3.116354,0 4.00661,0 0.883496,0 2.01682,-0.07419 3.392981,-0.22259 1.369161,-0.148393 2.779091,-0.519455 4.229201,-1.113119 1.44336,-0.593665 2.75889,-1.32875 3.94592,-2.219249 1.18732,-0.890497 2.15165,-1.854812 2.89371,-2.893723 0.74208,-1.038913 1.11314,-1.55798 1.11314,-1.55798 0,0 -0.371,-0.519458 -1.11314,-1.557981 -0.74206,-1.038913 -1.70639,-2.003228 -2.89371,-2.893725 -1.18733,-0.883503 -2.50248,-1.632188 -3.94592,-2.219247 -1.45037,-0.593664 -2.85992,-0.964704 -4.229201,-1.11312 -1.369166,-0.148392 -2.502498,-0.222589 -3.392981,-0.222589 -0.890487,0 -2.22585,0 -4.00661,0 z"
+         d="m 89.645617,25.952041 0.772756,2.013082 c 0.515174,1.341924 0.837154,2.460518 0.965953,3.355395 0.12877,0.894877 0.187303,1.789363 0.187303,2.684241 0,0.88785 -0.05847,1.782723 -0.187303,2.6776 -0.128777,0.894879 -0.450779,2.013084 -0.965953,3.355398 -0.515168,1.341925 -0.772756,2.013081 -0.772756,2.013081 0,0 0.772756,0 2.317938,0 1.545176,0 2.704324,0 3.476875,0 0.766684,0 1.750165,-0.07455 2.944377,-0.223685 1.188136,-0.149122 2.411653,-0.52201 3.670033,-1.118594 1.25253,-0.596585 2.39412,-1.335286 3.42421,-2.230165 1.03034,-0.894877 1.86717,-1.863935 2.51112,-2.907956 0.64396,-1.044024 0.96596,-1.565644 0.96596,-1.565644 0,0 -0.32194,-0.522013 -0.96596,-1.565644 -0.64395,-1.044023 -1.48078,-2.013082 -2.51112,-2.907959 -1.03035,-0.887849 -2.17161,-1.640216 -3.42421,-2.230163 -1.25861,-0.596584 -2.481792,-0.969449 -3.670033,-1.118595 -1.188142,-0.149122 -2.17163,-0.223684 -2.944377,-0.223684 -0.772751,0 -1.931559,0 -3.476875,0 z"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="path2131"
          inkscape:connector-curvature="0" />
@@ -565,7 +565,7 @@
                   <tspan
                      id="tspan1497"
                      y="0"
-                     x="0">0</tspan>
+                     x="0">1</tspan>
                 </text>
               </g>
               <g
@@ -601,7 +601,7 @@
                   <tspan
                      id="tspan1515"
                      y="0"
-                     x="0">1</tspan>
+                     x="0">0</tspan>
                 </text>
               </g>
               <g
@@ -637,7 +637,7 @@
                   <tspan
                      id="tspan1533"
                      y="0"
-                     x="0">1</tspan>
+                     x="0">0</tspan>
                 </text>
               </g>
               <g
@@ -673,7 +673,7 @@
                   <tspan
                      id="tspan1551"
                      y="0"
-                     x="0">1</tspan>
+                     x="0">0</tspan>
                 </text>
               </g>
             </g>
@@ -681,5 +681,11 @@
         </g>
       </g>
     </g>
+    <circle
+       style="opacity:1;fill:#000000;fill-opacity:0.04313725;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-opacity:1"
+       id="path1027"
+       cx="115.01814"
+       cy="41.962219"
+       r="2" />
   </g>
 </svg>

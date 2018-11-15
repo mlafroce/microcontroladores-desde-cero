@@ -1,15 +1,15 @@
 
 \documentclass[12pt, a4paper, twoside]{article}
 
-
 \usepackage[utf8]{inputenc} % Especifica la codificación de caracteres de los documentos.
 \usepackage[spanish]{babel} % Indica que el documento se escribirá en español.
 \usepackage{graphicx,grffile}
 
 \usepackage{array}
 \usepackage{amssymb,amsmath} % utilizado por pandoc para renderizar formulas
-\usepackage{longtable}
+\usepackage{caption}
 \usepackage{float}
+\usepackage{longtable}
 \usepackage{multirow}
 \usepackage{mdframed}
 %%% fixes pandoc %%%
@@ -27,6 +27,7 @@
 \pdfsuppresswarningpagegroup=1
 \setlength{\emergencystretch}{3em}
 
+\captionsetup{font=footnotesize}
 % Code formatting macros from pandoc
 \usepackage{color}
 \usepackage{fancyvrb}

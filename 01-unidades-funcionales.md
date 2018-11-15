@@ -9,27 +9,27 @@ La expresiones *booleanas* se representan de 3 formas distintas, una puede ser m
 
 ### Compuerta NOT
 
-![Compuerta NOT](01-00-compuerta-not.pdf){width=60%}
+![Compuerta NOT](01-00-compuerta-not.pdf){width=80%}
 
 ### Compuerta AND
 
-![Compuerta AND](01-01-compuerta-and.pdf){width=60%}
+![Compuerta AND](01-01-compuerta-and.pdf){width=80%}
 
 ### Compuerta OR
 
-![Compuerta OR](01-02-compuerta-or.pdf){width=60%}
+![Compuerta OR](01-02-compuerta-or.pdf){width=80%}
 
 ### Compuerta XOR
 
-![Compuerta XOR](01-03-compuerta-xor.pdf){width=60%}
+![Compuerta XOR](01-03-compuerta-xor.pdf){width=80%}
 
 ### Compuerta NAND
 
-![Compuerta NAND](01-04-compuerta-nand.pdf){width=60%}
+![Compuerta NAND](01-04-compuerta-nand.pdf){width=80%}
 
 ### Compuerta NOR
 
-![Compuerta NOR](01-05-compuerta-nor.pdf){width=60%}
+![Compuerta NOR](01-05-compuerta-nor.pdf){width=80%}
 
 ## Flip flops
 
