@@ -16,7 +16,7 @@ Paralelo a los trabajos de Turing, el ejercito de EE.UU. trabajó en una máquin
 
 ### Modelo Von Neumann
 
-![Modelo Von Neumann](00-00-modelo-von-neumann.png){width=256px}
+![Modelo Von Neumann](00-00-modelo-von-neumann.pdf){width=60%}
 
 El modelo Von Neumann reconoce 5 componentes principales en una computadora
 
@@ -34,13 +34,13 @@ Este modelo además introduce el concepto de *programa almacenado*, en el que lo
 
 ### Modelo de bus de sistema
 
-![Bus de sistema](00-01-bus-de-sistema.png){width=512px}
+![Bus de sistema](00-01-bus-de-sistema.pdf){width=60%}
 
 Esta modernización del modelo Von Neumann propone el uso de un *bus simple del sistema* por el cual circulan los datos (*Data Bus*), las direcciones de memoria donde se encuentran esos datos (*Address Bus*), y los datos para controlar las distintas unidades (*Control Bus*). Además, se combina la ALU con la unidad de control, pasándose a llamar CPU.
 
 ### Arquitectura Harvard
 
-![Arquitectura Harvard](00-02-arquitectura-harvard.png){width=256px}
+![Arquitectura Harvard](00-02-arquitectura-harvard.pdf){width=60%}
 
 La característica principal del modelo harvard es que utiliza distintos buses para la memoria de instrucciones y la de datos. Esto le permite usar distintas tecnologías para cada memoria, como también distinto espacio de memoria, por ejemplo, puedo tener instrucciones de 16 bits de largo y el bus de datos con un ancho de 8 bits.
 
@@ -49,7 +49,7 @@ La característica principal del modelo harvard es que utiliza distintos buses p
 
 Como cualquier sistema complejo, una computadora puede ser vista desde un número de niveles, siendo el más alto el nivel de *usuario* y el más bajo, transistores, capacitores, etc. Cada nivel representa una abstracción. Esto nos permite independizar los distintos niveles: un usuario no necesita saber cómo está programada una aplicación para usarla, y un programador no necesita saber cómo están dispuestas las compuertas lógicas del procesador para programar.
 
-![Niveles de complejidad](00-03-niveles-de-complejidad.png){width=256px}
+![Niveles de complejidad](00-03-niveles-de-complejidad.pdf){width=60%}
 
 La estratificación permitió además que el usuario actualizara su computadora manteniendo compatibilidad de las capas superiores. El programador puede escribir código para una familia de hardware y que este se mantenga compatible con las actualizaciones.
 
