@@ -51,7 +51,7 @@ Los flip flops son utilizados frecuentemente para almacenar información. El fli
 
 #### Flip flop D
 
-![Flip-flop D](01-08-flip-flop-d.pdf)
+![Flip-flop D](01-09-flip-flop-d.pdf)
 
 ### Flip flop sincrónicos
 
