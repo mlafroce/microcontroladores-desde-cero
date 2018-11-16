@@ -69,6 +69,8 @@ Nuestro primer componente será uno que tenga 2 entradas `a_i`, `b_i`, y 6 salid
 
 El segundo componente tendrá 2 entradas, `a_i`, `b_i`, y sus salidas, `rs_o`, `jk_o`, `t_o`, y `d_o` corresponderan a las salidas los flip-flops correspondientes.
 
+#### Compuertas lógicas
+
 Para el primer componente, iniciamos declarando la interfaz en archivo de extensión *vhdl*:
 
 ~~~{.vhdl}
@@ -124,6 +126,8 @@ Cerramos la implementación escribiendo `end <nombre arquitectura>`
 ~~~{.vhdl}
 end behaviour;
 ~~~
+
+#### Flip flops
 
 Para el segundo componente, que utiliza flip flops, tendremos que agregar una entrada de *clock*. Esta nueva entrada será la que sincronizará los flip-flops, cuando tenga un flanco ascendiente del reloj, actualizo los estados de cada uno de ellos.
 
@@ -186,32 +190,42 @@ begin
   begin
     -- Ejecutar sólo cuando hay flanco ascendente del reloj
     if rising_edge(clk_i) then
-      -- Asigno los valores de las entradas a mi vector de entradas
+      -- Asigno los valores a mi vector de entradas
       input_v := a_i & b_i; 
 ~~~
 
 Una vez que armamos el vector, procedemos a llamar al `case`. Notar que le estamos asignando los valores a las signal `_status`, y no a la salida directo.
 
 ~~~{.vhdl}
-  -- En vez de calcular la lógica combinacional de las
-  -- distintas tablas de verdad, utilizamos un `case`
-  case input_v is
-    when "00" => -- a_i = 0, b_i = 0
-      rs_status <= '0';
-      jk_status <= '0';
-    when "01" => -- a_i = 0, b_i = 1
-      rs_status <= '1';
-      jk_status <= '1';
-      d_status <= '0';
-    when "10" => -- a_i = 1, b_i = 0
-      rs_status <= '1';
-      jk_status <= '1';
-      d_status <= '1';
-      t_status <= not t_status;
-      -- En los casos especiales, como el estado X
-      -- (indeterminado), no hago nada
-    when others => null;
-  end case;
+-- En vez de calcular la lógica combinacional de las
+-- distintas tablas de verdad, utilizamos un `case`
+case input_v is
+  when "00" => -- a_i = 0, b_i = 0
+    -- Vamos por la implementación con compuertas NOR
+    -- La siguiente linea es innecesaria
+    rs_status <= rs_status;
+    jk_status <= '0';
+  when "01" => -- a_i = 0, b_i = 1
+    -- r = 0, s = 1
+    rs_status <= '1';
+    -- j = 0, k = 1
+    jk_status <= '1';
+    -- Utilizamos b_i como puerto de enable
+    d_status <= '0';
+  when "10" => -- a_i = 1, b_i = 0
+    -- r = 1, s = 0
+    rs_status <= '0';
+    -- j = 1, k = 0
+    jk_status <= '0';
+  when "11" => -- a_i = 1, b_i = 1
+    -- En los RS (NOR), 11 es un estado no deseado
+    rs_status <= 'X';
+    jk_status <= not jk_status;
+    d_status <= '1';
+    t_status <= not t_status;
+  -- En los casos especiales, como X (indeterminado), no hago nada
+  when others => null;
+end case;
 ~~~
 
 Una vez declarado el case, unimos el estado de los `_status`
@@ -239,8 +253,106 @@ end behaviour;
 
 ### Probando nuestros componentes
 
+Hay varios métodos para simular nuestros componentes y probar su correcto funcinoamiento. Uno de estos es crear un componente tipo caja negra, que contenga al componente a probar y le envíe señales de prueba.
+
+Haremos un componente de estos para simular el comportamiento de `hello_flip_flops`
+
+Empezamos definiendo una interfaz vacía
+
+~~~{.vhdl}
+-- declaramos una interfaz vacía "hello_flip_flops_test",
+-- ya que este componente no necesita entradas ni salidas
+entity hello_flip_flops_test is
+end hello_flip_flops_test;
+~~~
+
+Comienzo a definir la implementación de mi componente simulador. Como este componente va a hacer uso de otro componente (el de los flip flops que quiero probar), tengo que declarar la interfaz del otro componente.
+
+~~~{.vhdl}
+architecture behaviour of hello_flip_flops_test is
+  -- Declaro el componente cuidando que la interfaz sea
+  -- la misma que la de la que queremos probar 
+  component hello_flip_flops is
+    port(
+    -- Entradas
+    a_i: in std_logic := '0';
+    b_i: in std_logic := '0';
+    clk_i: in std_logic;
+    -- Salidas
+    rs_o: out std_logic;
+    jk_o: out std_logic;
+    t_o: out std_logic;
+    d_o: out std_logic
+    );
+  end component hello_flip_flops;
+~~~
+
+Para ejecutar las pruebas voy a simular 3 señales: las dos entradas, a_i y b_i, y la señal de clock. Las declaro e inicializo.
+
+~~~{.vhdl}
+  -- Instancio señales que voy a ir variando en las pruebas
+  signal a_t : std_logic := '0';
+  signal b_t : std_logic := '0';
+  signal clk_t : std_logic := '0';
+~~~
+
+Una vez declaradas las señales e interfaces de componentes, se procede a iniciar la arquitectura.
+
+Comienzo instanciando el componente a probar, y uniendo mis señales de prueba a las entradas del componente.
+Como no voy a utilizar las salidas, solamente las observo, no las vinculo a ninguna señal.
+
+~~~{.vhdl}
+begin
+  -- Instancia del componente a probar
+  -- Le asigno a las entradas mis señales de prueba
+  component_inst: hello_flip_flops
+    port map(
+    -- Entradas
+    a_i => a_t,
+    b_i => b_t,
+    clk_i => clk_t,
+    -- Salidas
+    rs_o => open,
+    jk_o => open,
+    t_o => open,
+    d_o => open
+    );
+~~~
+
+Creo un proceso por cada señal, esperando un tiempo fijo, y alternando el valor de la señal en cada ciclo. La instrucción `wait for` es una instrucción *no sintetizable* que se ejecuta secuencialmente en nuestro simulador.
+
+~~~{.vhdl}
+  -- Señales de prueba
+  process -- clk_t process
+  begin
+  wait for 20 ns;
+  clk_t <= not clk_t;
+  end process;
+
+  process -- a_t process
+  begin
+  wait for 40 ns;
+  a_t <= not a_t;
+  end process;
+
+  process -- b_t process
+  begin
+  wait for 80 ns;
+  b_t <= not b_t;
+  end process;
+~~~
+
+Finalizo la implementación
+
+~~~{.vhdl}
+end architecture ; -- behaviour
+~~~
+
+Existen varios simuladores, algunos privados y otros de código abierto. Se hará mención de ellos en el repositorio de actividades.
+
 ## Bibliografía
 
 * Computer science illuminated, Nell Dale, John Lewis
 
 * The 8051 microcontroller and embedded systems using assembly and c-2nd-ed by mazidi.
+

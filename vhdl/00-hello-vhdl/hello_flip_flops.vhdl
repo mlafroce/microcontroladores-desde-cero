@@ -31,18 +31,33 @@ begin
   begin
     -- Ejecutar sólo cuando hay flanco ascendente del reloj
     if rising_edge(clk_i) then
-      -- En vez de calcular la lógica combinacional de las distintas tablas
-      -- de verdad, utilizamos un `case`
+      -- Asigno los valores a mi vector de entradas
       input_v := a_i & b_i; 
+      -- En vez de calcular la lógica combinacional de las
+      -- distintas tablas de verdad, utilizamos un `case`
       case input_v is
-        when "00" =>
-          rs_o <= '0';
-          jk_o <= '0';
-          d_o <= '0';
-        when "10" =>
-          rs_o <= '1';
-          jk_o <= '1';
-          d_o <= '1';
+        when "00" => -- a_i = 0, b_i = 0
+          -- Vamos por la implementación con compuertas NOR
+          -- La siguiente linea es innecesaria
+          rs_status <= rs_status;
+          jk_status <= '0';
+        when "01" => -- a_i = 0, b_i = 1
+          -- r = 0, s = 1
+          rs_status <= '1';
+          -- j = 0, k = 1
+          jk_status <= '1';
+          -- Utilizamos b_i como puerto de enable
+          d_status <= '0';
+        when "10" => -- a_i = 1, b_i = 0
+          -- r = 1, s = 0
+          rs_status <= '0';
+          -- j = 1, k = 0
+          jk_status <= '0';
+        when "11" => -- a_i = 1, b_i = 1
+          -- En los RS (NOR), 11 es un estado no deseado
+          rs_status <= 'X';
+          jk_status <= not jk_status;
+          d_status <= '1';
           t_status <= not t_status;
         -- En los casos especiales, como X (indeterminado), no hago nada
         when others => null;
