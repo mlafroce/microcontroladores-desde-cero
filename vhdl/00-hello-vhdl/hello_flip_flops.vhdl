@@ -19,24 +19,27 @@ entity hello_flip_flops is
 end hello_flip_flops;
 
 architecture behaviour of hello_flip_flops is
+-- El estado Q de cada flip flop
 signal rs_status : std_logic := '0';
 signal jk_status : std_logic := '0';
 signal t_status : std_logic := '0';
 signal d_status : std_logic := '0';
 begin
   process (clk_i)
-  -- El estado Q de cada flip flop
+  -- Armo este vector para usar en el case
+  variable input_v: std_logic_vector(0 to 1);
   begin
     -- Ejecutar sólo cuando hay flanco ascendente del reloj
     if rising_edge(clk_i) then
       -- En vez de calcular la lógica combinacional de las distintas tablas
       -- de verdad, utilizamos un `case`
-      case a_i is
-        when '0' =>
+      input_v := a_i & b_i; 
+      case input_v is
+        when "00" =>
           rs_o <= '0';
           jk_o <= '0';
           d_o <= '0';
-        when '1' =>
+        when "10" =>
           rs_o <= '1';
           jk_o <= '1';
           d_o <= '1';

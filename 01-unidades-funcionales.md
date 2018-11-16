@@ -176,15 +176,57 @@ begin -- begin behaviour
 process (clk_i)
 ~~~
 
-Y comenzamos a declarar el comportamiento
+Y comenzamos a declarar el comportamiento. Debido a que armar el circuito lógico es un proceso complejo, utilizaremos una contrucción del lenguaje para armar tablas de verdad: `case statements`
 
 ~~~{.vhdl}
-begin -- begin process
-  -- Ejecutar sólo cuando hay flanco ascendente del reloj
-  if rising_edge(clk_i) then
-    -- En vez de calcular la lógica combinacional de las distintas tablas
-    -- de verdad, utilizamos un `case`
-    case to_integer(unsigned(pixel_x_i)) is
+begin
+  process (clk_i)
+  -- Armo este vector para usar en el `case`
+  variable input_v: std_logic_vector(0 to 1);
+  begin
+    -- Ejecutar sólo cuando hay flanco ascendente del reloj
+    if rising_edge(clk_i) then
+      -- Asigno los valores de las entradas a mi vector de entradas
+      input_v := a_i & b_i; 
+~~~
+
+Una vez que armamos el vector, procedemos a llamar al `case`. Notar que le estamos asignando los valores a las signal `_status`, y no a la salida directo.
+
+~~~{.vhdl}
+  -- En vez de calcular la lógica combinacional de las
+  -- distintas tablas de verdad, utilizamos un `case`
+  case input_v is
+    when "00" => -- a_i = 0, b_i = 0
+      rs_status <= '0';
+      jk_status <= '0';
+    when "01" => -- a_i = 0, b_i = 1
+      rs_status <= '1';
+      jk_status <= '1';
+      d_status <= '0';
+    when "10" => -- a_i = 1, b_i = 0
+      rs_status <= '1';
+      jk_status <= '1';
+      d_status <= '1';
+      t_status <= not t_status;
+      -- En los casos especiales, como el estado X
+      -- (indeterminado), no hago nada
+    when others => null;
+  end case;
+~~~
+
+Una vez declarado el case, unimos el estado de los `_status`
+
+~~~{.vhdl}
+-- Asigno las señales a salidas
+rs_o <= rs_status;
+jk_o <= jk_status;
+t_o <= t_status;
+d_o <= d_status;
+~~~
+
+Y termino el comportamiento 
+
+~~~{.vhdl}
   end if; -- end if rising_edge
 end process;
 ~~~
@@ -197,7 +239,7 @@ end behaviour;
 
 ### Probando nuestros componentes
 
-# Bibliografía
+## Bibliografía
 
 * Computer science illuminated, Nell Dale, John Lewis
 
