@@ -8,7 +8,8 @@ output_file ?= $(output_name).pdf
 
 .PHONY: pdf clean
 
-all: $(img_files) $(tex_files) $(output_file)
+all: $(tex_files) $(img_files) $(output_file)
+	mkdir -p build/img
 
 build/%.tex: %.md
 	pandoc $< -o $@

@@ -1,5 +1,47 @@
-%%% fixes pandoc %%%
-\providecommand{\tightlist}{} % utilizado por enumerados
+%\usepackage[sfdefault]{FiraSans} %% option 'sfdefault' activates Fira Sans as the default text font
+%\usepackage[T1]{fontenc}
+%\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+\newcommand{\sectionnumberformat}[1]{%
+  \begin{minipage}{0.2\textwidth}
+      \bfseries\centering
+      \fontsize{48}{30}\sffamily\selectfont
+      \color{cyan}\scalebox{1}[2]{#1}
+  \end{minipage}
+}
+
+\newcommand{\sectionformat}[1]{%
+  \begin{minipage}{0.8\textwidth}
+    \begin{mdframed}[
+      align = right,
+      backgroundcolor = section-background,
+      hidealllines = true,
+      innerleftmargin = 2em,
+      innertopmargin = 5em]
+      \fontsize{20}{16}\selectfont
+      \color{white}\scalebox{1}[2]{#1}
+    \end{mdframed}
+  \end{minipage}
+}
+
+% Formato de título de secciones:
+% El número celeste y grande, y un recuadro gris con el texto
+
+\titleformat%
+    {\section}% Aplico estilo sobre \section
+    {\sffamily}
+    {\sectionnumberformat{\thesection}}%
+    {0pt}% Espacio interlineado
+    {\sectionformat}
+
+% Formato de subtítulos
+\titleformat%
+    {\subsection}% Aplico estilo sobre \section
+    {\color{blue}\fontsize{16}{10}\selectfont}
+    {\thesubsection\hspace{1em}}%
+    {1em}% Espacio interlineado
+    {}
+
 
 \let\origfigure\figure
 \let\endorigfigure\endfigure
@@ -19,6 +61,9 @@
 \usepackage{fancyvrb}
 \definecolor{code-block-line}{gray}{0.5}
 \definecolor{code-block-background}{gray}{0.95}
+\definecolor{section-background}{gray}{0.75}
+\definecolor{section-number-background}{gray}{0.25}
+\definecolor{section-font}{gray}{0.5}
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small}
@@ -29,8 +74,10 @@
   backgroundcolor=code-block-background,
   linewidth=0.5pt]}
 {\end{mdframed}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.4,0.4,0.4}{\textit{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
@@ -41,7 +88,6 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
 \newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
@@ -60,3 +106,6 @@
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
+
+%%% fixes pandoc %%%
+\providecommand{\tightlist}{} % utilizado por enumerados
