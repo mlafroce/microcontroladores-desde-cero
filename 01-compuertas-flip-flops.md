@@ -39,19 +39,29 @@ Los flip flops son utilizados frecuentemente para almacenar información. El fli
 
 #### Flip flop RS
 
-![Flip-flop RS](01-06-flip-flop-rs.pdf)
+Los flip flops **RS** son los más básicos, formados por 4 compuertas NAND o NOR. El nombre proviene de sus dos entradas: *R*, que proviene de *reset*, y *S*, que proviene de *set*. Mientras ambas entradas sean 0, la salida, *Q*, mantiene su valor. Si asignamos un valor alto a *R*, y a *S* lo mantenemos en 0, se le asigna el estado 0 a la salida *Q*, mientras que si asignamos 0 a *R*, y alto a *S*, el estado de *Q* pasa a ser 1.
+
+El problema que tiene este flip flop es que si ambas salidas son altas, el comportamiento es impredecible o *indeseado*, por lo cuál se lo marca en la tabla de verdad con una X.
+
+![Flip-flop RS](01-06-flip-flop-rs.pdf){width=80%}
 
 #### Flip flop JK
 
-![Flip-flop JK](01-07-flip-flop-jk.pdf)
+Los flip flops **JK** poseen la misma tabla de verdad que los RS, pero cambia el comportamiento del estado inválido. A diferencia del **RS**. Si las dos entradas son inválidas, invierte el valor almacenado.
+
+![Flip-flop JK](01-07-flip-flop-jk.pdf){width=80%}
 
 #### Flip flop T
 
-![Flip-flop T](01-08-flip-flop-t.pdf)
+Estos flip flops poseen dos entradas. La primera, **T** (*toggle*) está conectada a las entradas de un JK, de forma que cuando esta entrada *T* esté en bajo, mantenga su valor, y cuando *T* esté en alto, lo altene. La segunda entrada, **E** (*enable*), habilita el alto de *T* mediante el uso de una compuerta AND. Mientras **E** esté bajo, no pueden haber cambios en el valor del flip flop.
+
+![Flip-flop T](01-08-flip-flop-t.pdf){width=80%}
 
 #### Flip flop D
 
-![Flip-flop D](01-09-flip-flop-d.pdf)
+Estos flip flops también dos entradas como en los **T**. La entrada **D** está conectada las entradas de un flip flop *RS*. *D* se conecta a la entrada *S* y a la entrada *R* se lo conecta negado. De esta forma, la salida del flip flop *RS* es la misma que la de la entrada *D*. La otra entrada **E**, se utiliza para habilitar el alto en las entradas *S* y *R*, de forma que mientras *E* esté en bajo, las entradas *S* y *R* estén en bajo y el valor del flip flop se mantenga.
+
+![Flip-flop D](01-09-flip-flop-d.pdf){width=80%}
 
 ### Flip flop sincrónicos
 

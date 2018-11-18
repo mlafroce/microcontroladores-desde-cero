@@ -6,9 +6,11 @@ main_tex ?= "main.tex"
 output_name ?= "microcontroladores-desde-cero"
 output_file ?= $(output_name).pdf
 
-.PHONY: pdf clean
+.PHONY: pdf clean pre-build all
 
-all: $(tex_files) $(img_files) $(output_file)
+all: pre-build $(tex_files) $(img_files) $(output_file)
+
+pre-build:
 	mkdir -p build/img
 
 build/%.tex: %.md
