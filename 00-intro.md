@@ -30,24 +30,25 @@ El modelo Von Neumann reconoce 5 componentes principales en una computadora
 
 * **Unidad de control**: dirige las anteriores unidades.
 
-Este modelo además introduce el concepto de *programa almacenado*, en el que los programas se almacenan en conjunto los datos de entrada, pudiendo ser manipulados como datos.
+Este modelo además introduce el concepto de **programa almacenado**, en el que los programas se almacenan en conjunto los datos de entrada, pudiendo ser manipulados como datos.
 
 ### Modelo de bus de sistema
 
 ![Bus de sistema](00-01-bus-de-sistema.pdf){width=60%}
 
-Esta modernización del modelo Von Neumann propone el uso de un *bus simple del sistema* por el cual circulan los datos (*Data Bus*), las direcciones de memoria donde se encuentran esos datos (*Address Bus*), y los datos para controlar las distintas unidades (*Control Bus*). Además, se combina la ALU con la unidad de control, pasándose a llamar CPU.
+Esta modernización del modelo Von Neumann propone el uso de un *bus simple del sistema* por el cual circulan los datos (*Data Bus*), las *direcciones* de memoria donde se encuentran esos datos (*Address Bus*), y los datos para controlar las distintas unidades (*Control Bus*). Además, se combina la ALU con la unidad de control, pasándose a llamar CPU.
 
 ### Arquitectura Harvard
 
 ![Arquitectura Harvard](00-02-arquitectura-harvard.pdf){width=60%}
 
-La característica principal del modelo harvard es que utiliza distintos buses para la memoria de instrucciones y la de datos. Esto le permite usar distintas tecnologías para cada memoria, como también distinto espacio de memoria, por ejemplo, puedo tener instrucciones de 16 bits de largo y el bus de datos con un ancho de 8 bits.
+La característica principal de la arquitectura Harvard es que utiliza distintos buses para la memoria de instrucciones y la de datos. Esto le permite usar distintas tecnologías para cada memoria, como también distinto espacio de memoria, permitiéndome, por ejemplo, tener instrucciones de 16 bits de largo y el bus de datos con un ancho de 8 bits.
 
 
 ## Niveles de complejidad
 
-Como cualquier sistema complejo, una computadora puede ser vista desde un número de niveles, siendo el más alto el nivel de *usuario* y el más bajo, transistores, capacitores, etc. Cada nivel representa una abstracción. Esto nos permite independizar los distintos niveles: un usuario no necesita saber cómo está programada una aplicación para usarla, y un programador no necesita saber cómo están dispuestas las compuertas lógicas del procesador para programar.
+Como cualquier sistema complejo, una computadora puede ser vista desde un número de niveles, siendo el más alto el nivel de *usuario* y el más bajo, transistores, capacitores, etc.
+Cada nivel representa una abstracción. Esto nos permite independizar los distintos niveles: un usuario no necesita saber cómo está programada una aplicación para usarla, y un programador no necesita saber cómo están dispuestas las compuertas lógicas del procesador para programar.
 
 ![Niveles de complejidad](00-03-niveles-de-complejidad.pdf){width=60%}
 
@@ -57,9 +58,11 @@ De arriba hacia abajo los niveles son estos:
 
 * **Nivel de usuario/aplicación**: El usuario interactúa con la computadora ejecutando programas como navegadores web, ofimática, etc.
 
-* **Lenguaje de alto nivel**: El usuario programa instrucciones en lenguajes de alto nivel: Java, C, Python, etc. El programador utiliza instrucciones del lenguaje, pero no tiene conocimiento de su implementación en hardware. Es el compilador el que mapea instrucciones del lenguaje contra instrucciones implementadas en la máquina. Los lenguajes de alto nivel pueden ser recompilados para diversas máquinas con la intención de proveer el mismo comportamiento.
+* **Lenguaje de alto nivel**: El usuario programa instrucciones en lenguajes de alto nivel: Java, C, Python, etc. El programador utiliza instrucciones del lenguaje, pero no tiene conocimiento de su implementación en hardware.
+Es el compilador el que mapea instrucciones del lenguaje contra instrucciones implementadas en la máquina. Los lenguajes de alto nivel pueden ser recompilados para diversas máquinas con la intención de proveer el mismo comportamiento.
 
-* **Lenguaje de ensamblador/máquina**: Como se menciona anteriormente, el compilador traduce código de *alto nivel* a instrucciones de máquina. Los *lenguajes de máquina* trabajan con conceptos de hardware como los registros de datos y la transferencia entre ellos. Muchas de las instrucciones se describen por el tipo de operaciones que hacen con los registros y cuáles utilizan. El conjunto de instrucciones de una máquina se conoce como **Set de instrucciones**. El código de máquina es *código binario*, y dado lo engorroso de programar en esta forma, se utiliza lo que se conoce como *lenguaje de ensamblador*, que contiene mnemónicos (como *move*, *and*, *or*, *jmp*, etc) al correspondiente número en lenguaje de máquina.
+* **Lenguaje de ensamblador/máquina**: Como se menciona anteriormente, el compilador traduce código de *alto nivel* a instrucciones de máquina. Los *lenguajes de máquina* trabajan con conceptos de hardware como los registros de datos y la transferencia entre ellos. Muchas de las instrucciones se describen por el tipo de operaciones que hacen con los registros y cuáles utilizan.
+El conjunto de instrucciones de una máquina se conoce como **Set de instrucciones**. El código de máquina es *código binario*, y dado lo engorroso de programar en esta forma, se utiliza lo que se conoce como *lenguaje de ensamblador*, que contiene mnemónicos (como *move*, *and*, *or*, *jmp*, etc) al correspondiente número en lenguaje de máquina.
 
 * **Nivel de control**: Es mediante señales de control que la *CPU* opera sobre los registros. La unidad de control interpreta el código de máquina y mediante lógica de circuitos transfiere datos entre registros. Hay varias formas de implementar la unidad de control, una es la implementación estática física (*Hardwire*), que posee la ventaja de ser veloz. Otra forma es implementar las instrucciones en forma de *microprograma*. Este microprograma, también conocido como *firmware* interpreta las instrucciones de lenguaje máquina y ejecuta las microinstrucciones correspondientes para llevarlas a cabo.
 
