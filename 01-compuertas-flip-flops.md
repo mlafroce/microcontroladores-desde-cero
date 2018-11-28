@@ -35,6 +35,8 @@ La expresiones *booleanas* se representan de 3 formas distintas, una puede ser m
 
 Los flip flops son utilizados frecuentemente para almacenar información. El flip flop más básico es conocido como el R-S. Este circuito posee dos variables de entrada (*Set* y *Reset*), y generalmente dos de salida: $Q$ y $\overline{Q}$, que vendría ser la negación del primero. Como característica principal, la salida de flip-flops depende del estado del mismo. Por este motivo, las tablas de verdad de los flip-flops tienen, además de las variables de entrada, una variable $Q_{t}$ y otra $Q_{t+1}$
 
+\todo{¿Es mejor empezar con FFs o con latches?}
+
 ### Flip flop asincrónicos
 
 #### Flip flop RS
@@ -67,6 +69,8 @@ Estos flip flops también dos entradas como en los **T**. La entrada **D** está
 
 Para evitar *condiciones de carrera* (una señal llega antes que otra), y brindar estabilidad al flip flop, se utiliza una señal de reloj que habilite los cambios de estado.
 
+\todo{¿Agrego ejemplo de cascada de compuertas que se desincronizan?}
+
 ## Síntesis en VHDL
 
 No es necesario sintetizar estos componentes uno por uno para poder utilizarlos, dado que los compiladores ya detectan cuál es la configuración óptima a utilizar con un FPGA. Sin embargo, veremos cómo crear un componente con cada una de estas funciones.
@@ -78,6 +82,8 @@ En la programación es habitual comenzar por un programa "Hola mundo" (más cono
 Nuestro primer componente será uno que tenga 2 entradas `a_i`, `b_i`, y 6 salidas, correspondientes a cada una de las funciones lógicas, `not_a_o`, `and_o`, `or_o`, `xor_o`. `nand_o`, y `nor_o`. Este componente no posee estado, por lo que no hará uso del reloj.
 
 El segundo componente tendrá 2 entradas, `a_i`, `b_i`, y sus salidas, `rs_o`, `jk_o`, `t_o`, y `d_o` corresponderan a las salidas los flip-flops correspondientes.
+
+\todo{¿Está bueno arrancar con estos dos componentes?}
 
 #### Compuertas lógicas
 
@@ -266,6 +272,8 @@ end behaviour;
 Hay varios métodos para simular nuestros componentes y probar su correcto funcinoamiento. Uno de estos es crear un componente tipo caja negra, que contenga al componente a probar y le envíe señales de prueba.
 
 Haremos un componente de estos para simular el comportamiento de `hello_flip_flops`
+
+\todo{Pruebo hello flip flops o armo otro componente?}
 
 Empezamos definiendo una interfaz vacía
 

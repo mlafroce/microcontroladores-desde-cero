@@ -11,6 +11,7 @@ Para la segunda guerra mundial, los alemanes implementaron una máquina que encr
 
 Paralelo a los trabajos de Turing, el ejercito de EE.UU. trabajó en una máquina para computar tablas de trayectoria balística, llamada ENIAC.
 
+\todo{Agregar alguna foto así no queda wall-of-text}
 
 ## Computadoras modernas
 
