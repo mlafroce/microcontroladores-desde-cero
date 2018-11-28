@@ -1,5 +1,5 @@
 SRCS ?= $(wildcard *.vhdl)
-MAIN = cpu_register_test
+MAIN = register_file
 SIM_TIME = 2000ns
 
 all: compile
@@ -12,7 +12,7 @@ run: compile
 	ghdl -r $(MAIN) --stop-time=$(SIM_TIME) --vcd=$(MAIN).vcd
 
 run-tests: compile
-	ghdl -r cpu_register_test --stop-time=$(SIM_TIME) --vcd=cpu_register_test.vcd
+	ghdl -r register_file_test --stop-time=$(SIM_TIME) --vcd=cpu_register_test.vcd
 	
 clean:
 	$(RM) *.vcd *.cf

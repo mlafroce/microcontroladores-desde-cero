@@ -7,21 +7,21 @@ entity cpu_register is
   -- `generic` me permite utilizar constantes que el usuario
   -- puede ajustar al momento de instanciar el componente.
   -- Se le puede asignar un valor default (en este caso, 32)
-  generic (WIDTH: integer := 32);
+  generic (CPU_REG_WIDTH: integer := 32);
   port(
     -- Entradas
-    data_i: in std_logic_vector(WIDTH - 1 downto 0);
+    data_i: in std_logic_vector(CPU_REG_WIDTH - 1 downto 0);
     clk_i: in std_logic;
     en_i: in std_logic;
     write_i: in std_logic;
     -- Salidas
-    data_o: out std_logic_vector(WIDTH - 1 downto 0)
+    data_o: out std_logic_vector(CPU_REG_WIDTH - 1 downto 0)
   );
 end cpu_register;
 
 architecture behaviour of cpu_register is
 signal data_s : std_logic_vector
-    (WIDTH - 1 downto 0) := (others => '0');
+    (CPU_REG_WIDTH - 1 downto 0) := (others => '0');
 begin
   process (clk_i)
   begin
