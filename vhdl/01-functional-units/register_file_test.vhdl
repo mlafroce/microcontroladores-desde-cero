@@ -3,8 +3,8 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all; -- permite usar to_unsigned
 
-entity cpu_register_test is
-end cpu_register_test;
+entity register_file_test is
+end register_file_test;
 
 architecture behaviour of cpu_register_test is
   -- Señales de prueba

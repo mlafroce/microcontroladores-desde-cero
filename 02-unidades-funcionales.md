@@ -18,7 +18,7 @@ Una CPU puede contar con un vector de registros, llamado *banco de registros* (*
 
 #### Puertos de lectura y escritura
 
-Un banco de registros puede contar con uno o más puertos de lectura para poder leer el contenido de uno de sus registros. La selección del registro se hace mediante un multiplexor.
+Un banco de registros puede contar con uno o más puertos de lectura para poder leer el contenido de uno de sus registros. La selección del registro se hace mediante un *multiplexor*.
 
 De forma análoga se puede contar con uno o más puertos de escritura, que permitan escribir contenido en uno de sus registros.
 
@@ -70,6 +70,21 @@ begin
 end behaviour;
 ~~~
 
+#### Implementación del banco de registros
+
+De forma muy similar vamos a implementar un banco de registros que utilice el componente anterior. Nuestro banco de registros tendrá lo siguiente:
+
+* `NUM_REG` registros, cada uno de ancho `WIDTH`
+
+* Dos *puertos de salida* de ancho `WIDTH`, para poder usar como operandos en instrucciones aritmético lógica.
+
+* Un *puerto de entrada* de ancho `WIDTH`, para almacenar los resultados de las operaciones previamente nombradas
+
+* Entrada de reloj
+
+* 3 selectores de ancho log2(`WIDTH`), de forma de poder seleccionar los puertos de salida y entrada previamente nombrados.
+
+* Puerto que habilite la escritura en las entradas
 
 ## Acceso a memoria principal
 
