@@ -32,8 +32,8 @@ begin
           data_s <= data_i;
         end if; -- end if write_i
       end if; -- end if en_i
-      data_o <= data_s;
     end if; -- end if rising_edge
+  data_o <= data_s;
   end process;
 
 end behaviour;

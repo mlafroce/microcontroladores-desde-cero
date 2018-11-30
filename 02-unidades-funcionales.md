@@ -68,13 +68,57 @@ begin
           data_s <= data_i;
         end if; -- end if write_i
       end if; -- end if en_i
-      data_o <= data_s;
     end if; -- end if rising_edge
   end process;
+  data_o <= data_s;
 end behaviour;
 ~~~
 
-#### Implementación del banco de registros
+#### ¿Cuándo le asigno valor a la salida?
+
+En la implementación anterior escribimos:
+
+~~~{.vhdl}
+  process (clk_i)
+  ...
+  end process;
+  data_o <= data_s;
+~~~
+
+Lo que se puede interpretar como "cuando ocurre un cambio en la entrada `clk_i`, ejecutar [...]. Además, de forma concurrente asignar el valor de `data_s` a la salida `data_o`"
+
+Esto no es un detalle menor, dado que, cuando lo sintetizamos, el reporte nos indica que se utilizaron los siguientes componentes: 
+
+    Total logic elements  33
+      Total combinational functions 1
+      Dedicated logic registers 32
+      Total registers 32
+
+Esto tiene sentido ya que nuestro registro es de 32 bits y se sintetiza con 32 flip flops.
+
+Sin embargo, si nuestro código hubiera sido el siguiente
+
+~~~{.vhdl}
+  process (clk_i)
+    if rising_edge(clk_i) then
+      if write_i = '1' then
+        data_s <= data_i;
+      end if; -- end if write_i
+      data_o <= data_s;
+    end if; -- end if rising_edge
+  end process;
+~~~
+
+La escritura de la señal de salida ocurre únicamente cuando hay flanco ascendente del reloj. Esto es un inconveniente para el sintetizador, ya que, al no tener definido qué hacer en el resto de los estados del reloj, utiliza un *latch* para mantener el estado de la salida.
+
+Ahora, cada bit del registro está implementado por un flip flop y un latch, lo que duplica la cantidad de unidades lógicas utilizadas, además de meter un delay innecesario a la escritura del flip flop.
+
+    Total logic elements  65
+      Total combinational functions 1
+      Dedicated logic registers 64
+      Total registers 64
+
+### Implementación del banco de registros
 
 De forma muy similar vamos a implementar un banco de registros que utilice el componente anterior. Nuestro banco de registros tendrá lo siguiente:
 
@@ -90,46 +134,84 @@ De forma muy similar vamos a implementar un banco de registros que utilice el co
 
 * Puerto que habilite la escritura en las entradas
 
-\todo{Explicar...}
+Empezamos importando las bibliotecas estándar
 
 ~~~{.vhdl}
 -- Tipos standard
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all; -- permite usar to_unsigned
+~~~
 
+Declaramos los parámetros genéricos:
+
+* `REG_WIDTH`: El ancho de los registros.
+
+* `REG_NUM`: La cantidad de registros en el banco.
+
+* `REG_NUM_LOG`: La cantidad de bits necesarios para identificar cada registro, estos se calculan como $\lceil \log_2{N} \rceil$.
+
+~~~{.vhdl}
 entity register_file is
   generic (
     REG_WIDTH: integer := 32;
     REG_NUM: integer := 32;
     REG_NUM_LOG: integer := 5
   );
-  
+~~~
+
+Declaramos los puertos, elegimos sus nombres basados en la nomenclatura de *MIPS*.
+
+En MIPS, y la mayoría de los procesadores *RISC*, las instrucciones utilizan, a lo sumo, dos registros como operandos y un tercero como destino del resultado. Para poder usar este modelo, declaramos los siguientes puertos:
+
+* `clk_i`: Reloj de entrada, que va a estar conectado a todos los registros que lo componen.
+
+* `write_i`: Habilita la escritura. Las operaciones que hacen uso del registro de destino tienen que habilitar la escritura del mismo mediante este puerto.
+
+* `rs1_selector_i`, `rs2_selector_i`, `rdest_selector_i`: Entrada numérica, que nos permiten elegir cuáles registros utilizar como operandos (`rs1` y `rs2`), y cuál utilizar como destino (`rdest`).. Instintivamente nuestro primer paso sería instanciar un componente multiplexor, sin embargo, *VHDL* nos ofrece formas de realizar un multiplexado con herramientas del lenguaje.
+
+Primero vamos a necesitar 
+* `rdest_i`: Vector de ancho `REG_WIDTH` que, mediante un multiplexor, se conecta al registro indicado por `rdest_selector_i`. Este es un puerto de entrada ya que lo que quiero es usarlo para almacenar el resultado de ciertas operaciones aritmético lógicas, o destino en una lectura de la memoria principal.
+
+* `rs1_o`, `rs2_o`: Vector similar al anterior, que se conecta a los registros indicados por `rs1_selector_i` y `rs2_selector_i` respectivamente. Estos puertos son de salida ya que se se usan como operandos de operaciones aritmético lógicas, para direccionar un acceso de memoria, o como fuente en una escritura a la memoria principal.
+
+~~~{.vhdl}
   port(
-    -- Utilizamos una nomenclatura similar a la de MIPS
-    -- para los puertos
     -- Entradas
-    rs1_selector_i: in std_logic_vector(REG_NUM_LOG - 1 downto 0);
-    rs2_selector_i: in std_logic_vector(REG_NUM_LOG - 1 downto 0);
-    rdest_selector_i: in std_logic_vector(REG_NUM_LOG - 1 downto 0);
     clk_i: in std_logic;
     en_i: in std_logic;
     write_i: in std_logic;
+    rs1_selector_i: in integer range 0 to REG_NUM;
+    rs2_selector_i: in integer range 0 to REG_NUM;
+    rdest_selector_i: in integer range 0 to REG_NUM;
     rdest_i: in std_logic_vector(REG_WIDTH - 1 downto 0);
     -- Salidas
     rs1_o: out std_logic_vector(REG_WIDTH - 1 downto 0);
     rs2_o: out std_logic_vector(REG_WIDTH - 1 downto 0)
   );
 end register_file;
+~~~
 
-architecture behaviour of register_file is
+Ahora procedemos a implementar la arquitectura. Instintivamente nuestro primer paso sería instanciar un componente multiplexor, sin embargo, *VHDL* nos ofrece formas de realizar un multiplexado con herramientas del lenguaje.
+
+Primero vamos a necesitar una matriz de señales de `Número de registros` por `Ancho de registro`. Vamos a usar una matriz para la entrada de datos y otra para la salidas.
+
+Para esto *VHDL* nos exige declarar un tipo de dato propio, un array de vectores.
+
+~~~{.vhdl}
+architecture combinational of register_file is
   type reg_mux_type is array(0 to REG_NUM - 1) of 
     std_logic_vector(REG_WIDTH - 1 downto 0);
   signal input_s : reg_mux_type := (others => (others => '0'));
   signal output_s : reg_mux_type := (others => (others => '0'));
+~~~
+
+Instanciamos los registros previamente diseñados
+
+~~~{.vhdl}
   component cpu_register is
     generic (
-      CPU_REG_WIDTH: integer := 32
+      CPU_REG_WIDTH: integer := REG_WIDTH
     );
     port(
       -- Entradas
@@ -141,25 +223,34 @@ architecture behaviour of register_file is
       data_o: out std_logic_vector(CPU_REG_WIDTH - 1 downto 0)
     );
   end component cpu_register;
-begin
+~~~
+
+Luego instanciamos los *N* registros. Para esto utilizamos el comando `generate`. Este comando  se utiliza para sintetizar un arreglo de componentes, utilizando una variable para iterar sobre un rango.
+
+En el siguiente fragmento instanciamos *N* componentes `cpu_register`, y a cada uno de ellos le asignamos una fila de la matriz de entradas y de salidas a las correspondientes entradas y salidas del componente.
+
+~~~{.vhdl}
+begin -- begin architecture combinational
   reg_g: for I in 0 to REG_NUM - 1 generate
     regXinst: cpu_register
-     port map
-         (input_s(I), clk_i, en_i, write_i, output_s(I));
+      port map
+        (input_s(I), clk_i, en_i, write_i, output_s(I));
   end generate reg_g;
-
-  process (clk_i)
-  begin
-    -- Ejecutar sólo cuando hay flanco ascendente del reloj
-    if rising_edge(clk_i) then
-      input_s(to_integer(unsigned(rdest_i))) <= rdest_i;
-      rs1_o <= output_s(to_integer(unsigned(rs1_selector_i)));
-      rs2_o <= output_s(to_integer(unsigned(rs2_selector_i)));
-    end if; -- end if rising_edge
-  end process;
-
-end behaviour;
 ~~~
+
+Finalmente, asignamos a los puertos de nuestros componentes una fila de nuestras matrices de señales. Utilizamos las matrices de entrada y de salida según corresponda al tipo de puerto.
+
+~~~{.vhdl}
+  rs1_o <= output_s(rs1_selector_i);
+  rs2_o <= output_s(rs2_selector_i);
+  input_s(rdest_selector_i) <= rdest_i;
+
+end combinational;
+~~~
+
+#### Otras implementaciones
+
+También es posible implementar el banco de registros creando un componente multiplexor, instanciándolo y vinculando las señales correspondientes. Sin embargo, esto le agrega una complejidad innecesaria al componente. Se encuentra una implementación disponible en el repositorio del libro.
 
 ## Acceso a memoria principal
 

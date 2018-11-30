@@ -9,26 +9,26 @@ end cpu_register_test;
 architecture behaviour of cpu_register_test is
   -- Señales de prueba
   signal input_t : std_logic_vector(3 downto 0) := "0000";
-  signal clk_t : std_logic := '0';
+  signal clk_t : std_logic := '1';
   signal en_t : std_logic := '1';
   signal write_t : std_logic := '0';
   
   component cpu_register is
-    generic (WIDTH: integer);
+    generic (CPU_REG_WIDTH: integer);
     port(
       -- Entradas
-      data_i: in std_logic_vector(WIDTH - 1 downto 0);
+      data_i: in std_logic_vector(CPU_REG_WIDTH - 1 downto 0);
       clk_i: in std_logic;
       en_i: in std_logic;
       write_i: in std_logic;
       -- Salidas
-      data_o: out std_logic_vector(WIDTH - 1 downto 0)
+      data_o: out std_logic_vector(CPU_REG_WIDTH - 1 downto 0)
     );
   end component cpu_register;
 
 begin
   component_inst: cpu_register
-    generic map(WIDTH => 4) 
+    generic map(CPU_REG_WIDTH => 4) 
     port map(
     -- Entradas
     data_i => input_t,
@@ -57,7 +57,7 @@ begin
   process -- input_t process
     variable count_v: integer := 15;
     begin
-    wait for 80 ns;
+    wait for 40 ns;
     count_v := count_v - 1;
     if count_v = 0 then
         count_v := 15;
