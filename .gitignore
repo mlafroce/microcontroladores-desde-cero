@@ -1,4 +1,7 @@
 build
+sim_build
+
+*.pyc
 
 *.aux
 *.log

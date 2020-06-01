@@ -59,7 +59,7 @@ Estos flip flops poseen dos entradas. La primera, **T** (*toggle*) está conecta
 
 #### Flip flop D
 
-Estos flip flops también dos entradas como en los **T**. La entrada **D** está conectada las entradas de un flip flop *RS*. *D* se conecta a la entrada *S* y a la entrada *R* se lo conecta negado. De esta forma, la salida del flip flop *RS* es la misma que la de la entrada *D*. La otra entrada **E**, se utiliza para habilitar el alto en las entradas *S* y *R*, de forma que mientras *E* esté en bajo, las entradas *S* y *R* estén en bajo y el valor del flip flop se mantenga.
+Estos flip flops también hay dos entradas como en los **T**. La entrada **D** está conectada las entradas de un flip flop *RS*. *D* se conecta a la entrada *S* y a la entrada *R* se lo conecta negado. De esta forma, la salida del flip flop *RS* es la misma que la de la entrada *D*. La otra entrada **E**, se utiliza para habilitar el alto en las entradas *S* y *R*, de forma que mientras *E* esté en bajo, las entradas *S* y *R* estén en bajo y el valor del flip flop se mantenga.
 
 ![Flip-flop D](01-09-flip-flop-d.pdf){width=80%}
 
@@ -364,5 +364,5 @@ Existen varios simuladores, algunos privados y otros de código abierto. Se har�
 
 * Computer science illuminated, Nell Dale, John Lewis
 
-* The 8051 microcontroller and embedded systems using assembly and c-2nd-ed by mazidi.
+* The 8051 microcontroller and embedded systems using assembly and c, 2nd-ed, mazidi.
 
